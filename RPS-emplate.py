@@ -14,7 +14,6 @@ while True:
     prediction = model.predict(data)
     cv2.imshow('frame', frame)
     # Press q to close the window
-    print(prediction)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
             
@@ -22,3 +21,4 @@ while True:
 cap.release()
 # Destroy all the windows
 cv2.destroyAllWindows()
+
