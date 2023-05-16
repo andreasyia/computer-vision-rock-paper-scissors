@@ -1,48 +1,32 @@
-# Computer Vision RPS
-This project uses machine learning and specifically the library tensorflow, keras to train the model based ont the captured images taken from teachable machine for the game computer-vision-rock-paper-scissors.
+# **Computer Vision RPS**
+This project uses machine learning and specifically the library tensorflow, keras to train the model based on the captured images taken from teachable machine for the game computer-vision-rock-paper-scissors.
 
-# Milestone_1
-In Milestone_1, a repository was created in github in order to track the changes in the code. 
+### **Milestone 1**
+A repository was created in github in order to track the changes in the code. 
 
-# Milestone_2
-In Milestone_2 by using Teachable-Machine, multiple images was taken for rock-paper-scirros movements, in order to train the model as precise as possible. After the training of the model, the model was downloaded and the changes was pushed to the git repository.
+### **Milestone 2**
+By using Teachable-Machine, multiple images were taken for rock, paper and scissors movements, in order to train the model precisely. After the training of the model, the model was downloaded and the changes were pushed to the git repository.
 
-# Milestone_3
-In Milestone_3, firstly a conda environment was created called my_env, then it followed the activation of the environment and then the command pip installed in order to install the necessary requirements such as opencv-python, tensorflow and ipykernel. Afterwards, the model downloaded from the provided link was checked to make sure that everything was working perfectly and familiarising with the code.
-
-''' 
+### **Milestone 3**
+Firstly, a conda environment was created named `my_env`. After activating the
+environment, the necessary packages such as opencv-python, tensorflow and ipykernel were
+installed. Afterwards, the `RPS_template.py` file was run to check that the model trained in
+Teachable Machine was working perfectly before the game logic was implemented.
 
 The following commands have been used in order, to install the libraries mentioned above:
 
+```
 conda create -n my_env python = 3.8
 conda pip install
 pip install
- 
- 
- '''
 
- # Milestone_4
-In Milestone_4, a file created called manual_rps.py which stores the users and compters choices along with two functions called get_computer_choice and get_user_choice. The function get_computer_choice choose randomly between rock-paper-scissors and the function get_user_choice, its asking the user to choose between rock-paper-scissors, nested in while validation loop to make sure the user enter the correct input. Last but not least, the winner function created taking as arguments the computer_choice and user_choice to figure out who won. This function is consisting of if-elif-else statements. Lastly,the play function created to simulate the game, consisting of a while loop set to True, calling the functions get_computer_choice, get_user_choice and get_winner. Also the variable count defined to count the rounds played and asks the users if they want to play again after every 3 rounds. If the user enters 'y', the count is reset to 0 and the game continues. If the user enters anything else, the loop is broken and the game ends.
-
-''' 
+```
 
 
+### **Milestone 4**
+A file was created named manual_rps.py which stores the user's and computer's choices along with two functions named `get_computer_choice` and `get_user_choice`. The function `get_computer_choice` chooses randomly between rock, paper and scissors. The function `get_user_choice` asks the user to type their chosen move: rock, paper and scissors. It is nested in a while validation loop to make sure the user inputs a valid move for the game. Last but not least, the `get_winner` function takes as arguments the `computer_choice` and `user_choice` to determie the winner. This function consists of conditional statements. The `play` function was implemented to simulate the game, consisting of a while loop set to True, calling the functions `get_computer_choice`, `get_user_choice` and `get_winner`. Lastly, the variable count is defined to count the rounds played and asks the users if they want to play again after every 3 rounds. If the user enters 'y', the count is reset to 0 and the game continues. If the user enters anything else, the loop is broken and the game ends.
 
-import random
-
-def get_computer_choice():
-    rps_list =['rock', 'paper', 'scissors']
-    computer_choice = random.choice(rps_list)
-    return computer_choice
-
-def get_user_choice():
-    valid_input = False
-    while not valid_input:
-        user_choice = input("rock, paper or scissors:").lower()
-        if user_choice not in('rock', 'paper', 'scissors'):
-            print("Invalid input! Try entering a string.")
-        else:
-            return user_choice
+```
 
 def get_winner(computer_choice, user_choice):
     if computer_choice == user_choice:
@@ -70,26 +54,18 @@ def play():
 
 play()
 
+```
 
+### **Milestone 5**
+A file named `camera_rps.py` was created to consolidate all the game logic The `get_prediction_from_probabilities` function was implemented to find the index of the maximum value in a list of probabilities. Additionally, the `time` function was imported to track the script's execution time. To enhance the `get_winner` function, global variables `user_wins` and `computers_wins` were incorporated to keep count of the number of victories for both the computer and the user.
 
-
-'''
-
-# Milestone_5
-In milestone_5, a file created called camera_rps.py and putting everything together to create the logic of the game. Also, the function get_prediction_from_probabilities created which finds the index of the maximum value in the input list of probabilities. Then, function time was imported in order to get how much time has passed since the the script started. The get_winner function added with an update such as including the global variables user_wins and computers_wins to assist in counting the rounds of victory for the computer and the user.
-
-''' 
-
-Global variables
-computer_wins = 0
-user_wins = 0
-
-
+ 
+```
 def get_prediction_from_probabilities(probabilities):
 
-    '''The function 'get_prediction_from_probabilities' finds the index of the maximum value
+    'The function 'get_prediction_from_probabilities' finds the index of the maximum value
        in the input list of probabilities, which corresponds to the index of the predicted class, 
-       and returns the name of the corresponding class as a string.'''
+       and returns the name of the corresponding class as a string.'
     
     predicted_class = probabilities.argmax()
     if predicted_class == 0:
@@ -103,10 +79,10 @@ def get_prediction_from_probabilities(probabilities):
 
 def get_winner(computer_choice, user_choice):
 
-    '''The get_winner function takes two arguments, computer_choice and user_choice representing
+    'The get_winner function takes two arguments, computer_choice and user_choice representing
       the choices of the computer and the user, respectively. It then compares the two choices to 
       determine who wins the game. The function uses the global keyword to modify the global variables 
-      computer_wins and user_wins to keep track of the score.'''
+      computer_wins and user_wins to keep track of the score.'
     
     global computer_wins, user_wins 
     if user_choice == computer_choice:
@@ -123,67 +99,8 @@ def get_winner(computer_choice, user_choice):
     else:
         print("You lost! Computer won!!")
         computer_wins += 1
-
-while True:
-    
-      '''
-    The while loop implements the main logic of the game. 
-    It runs continuously until a player has won three rounds, or the user chooses to quit.
-    On each iteration of the loop, the program prompts the user to show their hand and captures
-    a video frame using the computer's camera. It then resizes and normalizes the frame to prepare
-    it for input into a pre-trained machine learning model. 
-    The model predicts the most likely hand gesture shown by the user, and the program selects a random
-    choice for the computer player. It then compares the choices to determine the winner of the round 
-    using the get_winner function.
-    The program keeps track of the rounds won by the user and the computer, once the player has won 
-    3 rounds, the program announces the winner and terminates the game.
-    
-    ''' 
-
-    countdown = 3
-    start_time = time.time()
-    while countdown > 0:
-        elapsed_time = time.time() - start_time
-        if elapsed_time >= 1.0:
-            print(countdown)
-            countdown -= 1
-            start_time = time.time()
-        # Wait for a short time between each count
-        cv2.waitKey(100)
-    print("Show your hand!")
-
-    ret, frame = cap.read()
-    resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
-    image_np = np.array(resized_frame)
-    normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-    data[0] = normalized_image
-    prediction = model.predict(data)
-    computer_choice = random.choice(['rock', 'paper', 'scissors'])
-    user_choice = get_prediction_from_probabilities(prediction)
-    print(f"Computer chose {computer_choice}")
-    print(f"You chose {user_choice}")
-    get_winner(computer_choice, user_choice)
-    if computer_wins == 3:
-        print("Computer won the game!")
-        break
-    elif user_wins == 3:
-        print("You won the game!")
-        break
-    cv2.imshow('frame', frame)
-    # Press q to close the window
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-            
-After the loop release the cap object
-cap.release()
-Destroy all the windows
-cv2.destroyAllWindows()
+```
 
 
-'''
-
-# Conclusion
-In conclusion, this project has allowed me to gain a better understanding of machine learning concepts and the numpy library. I have also improved my skills in implementing while loops and if-else statements, as well as organizing code in a logical order. Moving forward, there is potential for further improvement by implementing classes to enhance the code structure and readability. Additionally, adding an option for the user to choose whether or not to play another game would enhance the overall user experience
-
-
-
+## **Conclusion**
+In conclusion, this project has allowed me to gain a better understanding of machine learning concepts and the numpy library. I have also improved my skills in implementing while loops and if-else statements, as well as organizing code in a logical order. Moving forward, there is potential for further improvement by implementing classes to enhance the code structure and readability. Additionally, adding an option for the user to choose whether or not to play another game would enhance the overall user experience.
